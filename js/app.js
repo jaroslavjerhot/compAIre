@@ -5,34 +5,15 @@ const answerBox = document.getElementById('answerBox');
 const priceEl = document.getElementById('price');
 askBtn.addEventListener('click', ask);
 
-    // askBtn.addEventListener('click', () => {
-    //   const question = userInput.value.trim();
-    //   const model = modelSelect.value;
-
-    //   if(!question) {
-    //     alert("Please enter a question!");
-    //     return;
-    //   }
-
-      
-    //   // For demo: fake API response
-    //   answerBox.textContent = "Thinking...";
-    //   priceEl.textContent = "0.00";
-
-    //   setTimeout(() => {
-    //     const answer = `This is a demo answer from ${model} for: "${question}"`;
-    //     const price = (Math.random() * 0.05).toFixed(4); // fake price
-    //     answerBox.textContent = answer;
-    //     priceEl.textContent = price;
-    //   }, 1000);
-    // });
-
 async function ask() {
 
   // const prompt = document.getElementById("q").value;
   //alert(prompt);
   
   answerBox.textContent = "Čekám na odpověď...";
+  sPrefix =   `Odpověz na následující otázku jako filmový expert. Názvy filmů uváděj v češtině. 
+  U každého filmu uveď rok vydání a žánr. Odpovědi uveď ve formě JSON pole, 
+  kde každý prvek bude objekt s klíči "název", "rok" a "žánr".\n\nOtázka: `;
   const r = await fetch(
     "https://openonce.pythonanywhere.com/api/ask",
     {
@@ -40,7 +21,7 @@ async function ask() {
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({prompt: userInput.value.trim(), model: modelSelect.value})
+            body: JSON.stringify({prompt: sPrefix + userInput.value.trim(), model: modelSelect.value})
         }
   );
   //alert('after fetch');
