@@ -24,25 +24,26 @@
     <!-- Textarea and Model Selection -->
     <div class="card p-3 mb-3">
       <div class="mb-3">
-        <label for="userInput" class="form-label">Your Question:</label>
-        <textarea class="form-control" id="userInput" rows="4"></textarea>
+        <label for="userInput" class="form-label">Otázka:</label>
+        <textarea class="form-control" id="userInput" rows="4">Napiš seznam filmů s českými názvy, které režíroval Quentin Tarantino a které získaly Oscara. Uveď název filmu, rok vydání a kategorie, ve které film získal Oscara.
+        </textarea>
       </div>
       <div class="mb-3">
-        <label for="modelSelect" class="form-label">Choose Model:</label>
+        <label for="modelSelect" class="form-label">Vyber model:</label>
         <select class="form-select" id="modelSelect">
           <option value="gpt-4">GPT-4</option>
           <option value="gpt-4-32k">GPT-4-32k</option>
           <option value="gpt-3.5-turbo">GPT-3.5-Turbo</option>
         </select>
       </div>
-      <button class="btn btn-primary" id="askBtn">Ask</button>
+      <button class="btn btn-primary" id="askBtn">Zeptej se</button>
     </div>
 
     <!-- Answer and Price -->
     <div class="card p-3">
-      <div class="mb-2"><strong>Answer:</strong></div>
+      <div class="mb-2"><strong>Odpověď:</strong></div>
       <div class="answer-box" id="answerBox"></div>
-      <div class="mt-2"><strong>Price:</strong> $<span id="price">0.00</span></div>
+      <div class="mt-2"><strong>Cena odpovědi: </strong><span id="price">0.00</span></div>
     </div>
 
   </div>
