@@ -22,6 +22,23 @@ const sMoviePrefix = `Zpracuj následující dotaz jako filmový expert. Zjisti,
   téma, rok_od, rok_do. 
   \n\nDotaz: `
 
+const csv = await fLoadCsv(sOpenAIpricing)
+const lxdOpenAI = fCsvToLxd(csv);
+
+lxdOpenAI = lxdOpenAI.filter(dRow => Number(dRow.Total) <= 2);
+lxdOpenAI.forEach(dRow => {
+  sTotalCZK = (Number(dRow.Total) * 21 * 1.21).toFixed(0);
+  dRow.ModelName = "OpenAI | " + dRow.Model + "(" + sTotalCZK + " Kč/1Mt)";
+  dRow.Model = "OpenAI|" + dRow.Model
+});
+lxdOpenAI.forEach(dRow => {
+      const oOption = document.createElement("option");
+      oOption.value = dRow.Model;
+      oOption.textContent = dRow.ModelName;
+      modelSelect.appendChild(oOption);
+});
+
+
 askBtn.addEventListener('click', () => fAsk(sMoviePrefix));
 // userInput.textContent = "Francouzská černobílá komedie ze 70. let";
 // userInput.textContent = "Návštěva Borise Johnsona na Ukrajině po začátku války";
