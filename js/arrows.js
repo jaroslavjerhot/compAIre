@@ -49,3 +49,22 @@ document.addEventListener("keydown", function (event) {
 
   fSetCaretToEnd(loFocusable[iNextIndex]);
 });
+
+const oKeyDebug = document.getElementById("keyDebug");
+
+function fShowKey(event) {
+  const sText =
+    "type: " + event.type + "\n" +
+    "key: " + event.key + "\n" +
+    "code: " + event.code + "\n" +
+    "keyCode: " + event.keyCode + "\n" +
+    "which: " + event.which;
+
+  oKeyDebug.textContent = sText;
+
+  alert(sText);
+}
+
+document.addEventListener("keydown", fShowKey);
+document.addEventListener("keyup", fShowKey);
+
