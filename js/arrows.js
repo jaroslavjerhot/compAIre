@@ -96,8 +96,9 @@ const oKeyDebug = document.getElementById("keyDebug");
 // document.addEventListener("wheel", event => fLog("wheel", event), true);
 // document.addEventListener("contextmenu", event => fLog("contextmenu", event), true);
 
-document.addEventListener("dblclick", function(event) {
-    if (!lstDevice.includes("Mi-Box")) {return;}
-    event.preventDefault();
-    askBtn.click();
-});
+if (lstDevice.includes("Mi-Box")){
+    document.addEventListener("dblclick", function(event) {
+        event.preventDefault();
+        askBtn.focus();
+        askBtn.click();
+    })}

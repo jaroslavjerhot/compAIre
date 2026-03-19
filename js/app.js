@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   askBtn.addEventListener('click', () => fAsk(sMoviePrefix));
   userInput.textContent = localStorage.getItem('prompt') || "";
-  document.getElementById('keyDebug').textContent = lstDevice.join(", ") + ": " + navigator.userAgent;
+  // document.getElementById('keyDebug').textContent = lstDevice.join(", ") + ": " + navigator.userAgent;
   
 
 });
