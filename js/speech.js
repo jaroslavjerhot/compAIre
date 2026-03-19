@@ -74,8 +74,10 @@ if (SpeechRecognition) {
     }
 
     if (sFinalText + sInterim) {
+      alert('Recognized text: ' + sFinalText + sInterim);
       textarea.value = sFinalText + sInterim;
     }
+
     fResetSilenceTimer();
   };
 
