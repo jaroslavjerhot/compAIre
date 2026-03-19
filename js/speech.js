@@ -3,56 +3,85 @@ const micBtn = document.getElementById("micBtn");
 
 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
+let recognition = null;
+let bListening = false;
+let iSilenceTimer = null;
+let sFinalText = "";
+
 if (SpeechRecognition) {
-
-  const recognition = new SpeechRecognition();
-
+  recognition = new SpeechRecognition();
   recognition.lang = "cs-CZ";
   recognition.continuous = true;
   recognition.interimResults = true;
 
-  let finalText = "";
+  function fResetSilenceTimer() {
+    clearTimeout(iSilenceTimer);
+    iSilenceTimer = setTimeout(() => {
+      if (bListening) {
+        recognition.stop();
+      }
+    }, 2000);
+  }
 
-  micBtn.onclick = () => {
-    finalText = textarea.value;
+  function fStartListening() {
+    if (bListening) return;
+    textarea.value = "";
+    sFinalText = textarea.value ? textarea.value + " " : "";
+
     recognition.start();
-  };
+  }
+
+  function fStopListening() {
+    if (!bListening) return;
+    clearTimeout(iSilenceTimer);
+    recognition.stop();
+  }
+
+  micBtn.addEventListener("click", () => {
+    if (bListening) {
+      fStopListening();
+    } else {
+      fStartListening();
+    }
+  });
 
   recognition.onstart = () => {
-    micBtn.innerHTML = "🔴";
-    micBtn.classList.add("btn-danger");
-  };
-
-  recognition.onend = () => {
-    micBtn.innerHTML = "🎤";
-    micBtn.classList.remove("btn-danger");
+    bListening = true;
+    micBtn.classList.add("listening");
+    textarea.classList.add("listening");
+    fResetSilenceTimer();
   };
 
   recognition.onresult = (event) => {
-
-    let interim = "";
+    let sInterim = "";
 
     for (let i = event.resultIndex; i < event.results.length; i++) {
-
-      const transcript = event.results[i][0].transcript;
+      const sTranscript = event.results[i][0].transcript;
 
       if (event.results[i].isFinal) {
-        finalText += transcript + " ";
+        sFinalText += sTranscript + " ";
       } else {
-        interim += transcript;
+        sInterim += sTranscript;
       }
     }
 
-    textarea.value = finalText + interim;
+    textarea.value = sFinalText + sInterim;
+    fResetSilenceTimer();
+  };
+
+  recognition.onend = () => {
+    bListening = false;
+    clearTimeout(iSilenceTimer);
+    // micBtn.textContent = "🎤 Speak";
+    textarea.classList.remove("listening");
+    micBtn.classList.remove("listening");
   };
 
   recognition.onerror = (event) => {
     console.log("Speech error:", event.error);
+    clearTimeout(iSilenceTimer);
   };
-
 } else {
-
   micBtn.disabled = true;
-  micBtn.innerHTML = "Speech not supported";
-
+  micBtn.textContent = "Speech not supported";
 }
