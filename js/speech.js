@@ -67,7 +67,7 @@ if (SpeechRecognition) {
       sLastTranscript = sTranscript.trim();
 
       if (event.results[i].isFinal) {
-        alert('2: sTranscript: ' + sTranscript);
+        alert('1: sTranscript: ' + sTranscript);
         if (!sFinalText.includes(sTranscript)) {
           sFinalText += sTranscript + " ";
         }
