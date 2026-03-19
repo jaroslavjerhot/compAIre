@@ -50,9 +50,9 @@ document.addEventListener("keydown", function (event) {
   fSetCaretToEnd(loFocusable[iNextIndex]);
 });
 
-const oKeyDebug = document.getElementById("keyDebug");
+// const oKeyDebug = document.getElementById("keyDebug");
 
-// const oDebugBox = document.getElementById("keyDebug");
+const oDebugBox = document.getElementById("keyDebug");
 
 function fLog(sType, event) {
   const sMsg =
