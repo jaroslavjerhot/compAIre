@@ -75,7 +75,7 @@ if (SpeechRecognition) {
       }
     }
 
-    if (sFinalText + sInterim && !sFinalText.includes(sInterim)) {
+    if (sFinalText + sInterim) {
       alert('sFinalText: ' + sFinalText + '\nsInterim: ' + sInterim);
       textarea.value = sFinalText + sInterim;
     }
