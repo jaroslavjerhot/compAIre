@@ -18,7 +18,7 @@ const sMoviePrefix = `Zpracuj následující dotaz jako filmový expert. Zjisti,
   Nebo zda se jedná o téma filmu, zemi původu, žánr, charakteristika (černobílý, animovaný..) nebo období vydání filmu. 
   Země původu může být uvedena přídavným jménem. V tom případě odpověz názvem země.
   Odpověz pouze ve formě JSON pole, kde 
-  jednotlivé klíče budou herec, režisér, hudební_skladatel, žánr, země_původu, charakteristika,
+  jednotlivé klíče budou herec, režisér, hudebník, žánr, země_původu, charakteristika,
   téma, rok_od, rok_do. 
   \n\nDotaz: `
 let lxdOpenAI = []

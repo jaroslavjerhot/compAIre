@@ -99,6 +99,14 @@ const oKeyDebug = document.getElementById("keyDebug");
 if (lstDevice.includes("Mi-Box")){
     document.addEventListener("dblclick", function(event) {
         event.preventDefault();
-        askBtn.focus();
-        askBtn.click();
-    })}
+        const el = document.activeElement;
+        if (el && (el.tagName === "TEXTAREA" || el.tagName === "INPUT")) {
+        el.value = ""}})
+    // long click
+    document.addEventListener("keypress", function(event) {
+        if (event.code === 13) { // Enter key
+            askBtn.classList.add("active");
+            askBtn.click();
+            setTimeout(() => askBtn.classList.remove("active"), 150);
+    }});
+}
