@@ -52,61 +52,51 @@ document.addEventListener("keydown", function (event) {
 
 const oKeyDebug = document.getElementById("keyDebug");
 
-// const oDebugBox = document.getElementById("keyDebug");
 
-// function fLog(sType, event) {
-//   const sMsg =
-//     "type=" + sType +
-//     " | key=" + (event.key ?? "") +
-//     " | code=" + (event.code ?? "") +
-//     " | keyCode=" + (event.keyCode ?? "") +
-//     " | which=" + (event.which ?? "") +
-//     " | button=" + (event.button ?? "") +
-//     " | buttons=" + (event.buttons ?? "") +
-//     " | x=" + (event.clientX ?? "") +
-//     " | y=" + (event.clientY ?? "") +
-//     " | target=" + ((event.target && (event.target.id || event.target.tagName)) ?? "");
 
-//   //console.log(sMsg);
-// //   oDebugBox.textContent = sMsg + "\n" + oDebugBox.textContent;
-//   oDebugBox.textContent = sMsg;
-  
+[
+  "keydown",
+  "keyup",
+  "keypress",
+  "click",
+  "dblclick",
+  "mousedown",
+  "mouseup",
+  "pointerdown",
+  "pointerup",
+  "pointermove",
+  "mousemove",
+  "touchstart",
+  "touchend",
+  "focusin",
+  "focusout",
+  "change",
+  "input",
+  "submit",
+  "scroll",
+  "resize",
+  "mouseenter",
+  "mouseleave",
+  "mouseover",
+  "mouseout"
+].forEach(sEventType => {
+  document.addEventListener(sEventType, event => fLog(sEventType, event), true);
+});
+
+document.addEventListener("wheel", event => fLog("wheel", event), true);
+document.addEventListener("contextmenu", event => fLog("contextmenu", event), true);
+
+// if (lstDevice.includes("Mi-Box")){
+//     document.addEventListener("dblclick", function(event) {
+//         event.preventDefault();
+//         const el = document.activeElement;
+//         if (el && (el.tagName === "TEXTAREA" || el.tagName === "INPUT")) {
+//         el.value = ""}})
+//     // long click
+//     document.addEventListener("keypress", function(event) {
+//         if (event.code === 13) { // Enter key
+//             askBtn.classList.add("active");
+//             askBtn.click();
+//             setTimeout(() => askBtn.classList.remove("active"), 150);
+//     }});
 // }
-
-// [
-//   "keydown",
-//   "keyup",
-//   "keypress",
-//   "click",
-//   "dblclick",
-//   "mousedown",
-//   "mouseup",
-//   "pointerdown",
-//   "pointerup",
-//   "pointermove",
-//   "mousemove",
-//   "touchstart",
-//   "touchend",
-//   "focusin",
-//   "focusout"
-// ].forEach(sEventType => {
-//   document.addEventListener(sEventType, event => fLog(sEventType, event), true);
-// });
-
-// document.addEventListener("wheel", event => fLog("wheel", event), true);
-// document.addEventListener("contextmenu", event => fLog("contextmenu", event), true);
-
-if (lstDevice.includes("Mi-Box")){
-    document.addEventListener("dblclick", function(event) {
-        event.preventDefault();
-        const el = document.activeElement;
-        if (el && (el.tagName === "TEXTAREA" || el.tagName === "INPUT")) {
-        el.value = ""}})
-    // long click
-    document.addEventListener("keypress", function(event) {
-        if (event.code === 13) { // Enter key
-            askBtn.classList.add("active");
-            askBtn.click();
-            setTimeout(() => askBtn.classList.remove("active"), 150);
-    }});
-}
