@@ -30,13 +30,14 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   lxdOpenAI = lxdOpenAI.filter(dRow => Number(dRow.iTotal) <= 2);
   lxdOpenAI.forEach(dRow => {
-    sTotalCZK = (Number(dRow.Total) * 21 * 1.21).toFixed(0);
-    dRow.sModelName = "OpenAI | " + dRow.sModel + "(" + sTotalCZK + " Kč/1Mt)";
+    sTotalCZK = (Number(dRow.iTotal) * 21 * 1.21).toFixed(0);
+    dRow.sModelName = "OpenAI | " + dRow.sModel + " (" + sTotalCZK + " Kč/1Mt)";
     dRow.sModel = "OpenAI|" + dRow.sModel
   });
   lxdOpenAI.forEach(dRow => {
         const oOption = document.createElement("option");
         oOption.value = dRow.sModel;
+        if (dRow.sModel === localStorage.getItem('model')) oOption.selected = true;
         oOption.textContent = dRow.sModelName;
         modelSelect.appendChild(oOption);
   });
@@ -44,6 +45,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   askBtn.addEventListener('click', () => fAsk(sMoviePrefix));
   userInput.textContent = localStorage.getItem('prompt') || "";
+
 });
 
   async function fAsk(sPrefix) {
@@ -51,6 +53,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   // const prompt = document.getElementById("q").value;
   //alert(prompt);
   localStorage.setItem('prompt', userInput.value.trim());
+  localStorage.setItem('model', modelSelect.value);
+  
   answerBox.textContent = "Čekám na odpověď...";
 
   sPrefix = sPrefix.replaceAll(/[\u0000-\u001F]/g, "");
@@ -78,14 +82,20 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
   const data = await r.json();
 
+  
   //alert(JSON.stringify(data));
-  if ("priceHalsDPH" in data) {
-    priceEl.textContent = data.priceHalsDPH.toFixed(3) + " hal";
-    answerBox.textContent = data.answer
+  if ("iPromptTokens" in data) {
+    dctModel = lxdOpenAI.find(dRow => dRow.sModel === modelSelect.value);
+    iPriceUSD = (data.iPromptTokens * dctModel.iInput + data.iCompletionTokens * dctModel.iOutput)/1000000;
+    data.iPriceHalsDPH = (iPriceUSD * 100 * 21 * 1.21).toFixed(3);
   } else {
-    priceEl.textContent = '-- hal';
-    answerBox.textContent = 'Error in price: ' + (data.answer || 'unknown')
+    data.iPriceHalsDPH = '--';
+    data.iElapsedMs = '--';
   }
+
+answerBox.textContent = data.sAnswer
+priceEl.textContent = data.iPriceHalsDPH + ' hal / ' + (data.iElapsedMs/1000).toFixed(3) + ' s';
+
 
 x=0
   
