@@ -59,6 +59,7 @@ const oDebugBox = document.getElementById("keyDebug");
 function fLog(sType, event) {
   const iEventX = event.clientX ?? 0;
   const iEventY = event.clientY ?? 0;
+  sDir = "";
   if (iEventX > iPrevEventX) sDir='right'
   else if (iEventX < iPrevEventX) sDir='left'
   else if (iEventY < iPrevEventY) sDir='up'
