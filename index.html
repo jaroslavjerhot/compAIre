@@ -25,15 +25,19 @@
     <div class="card p-3 mb-3">
       <div class="mb-3">
         <label for="userInput" class="form-label">Otázka:</label>
-        <textarea class="form-control" id="userInput" rows="4">
+        <textarea class="form-control" id="userInput" rows="2">
         </textarea>
+            <button id="micBtn" class="btn btn-outline-light">
+      🎤
+    </button>
       </div>
       <div class="mb-3">
         <label for="modelSelect" class="form-label">Vyber model:</label>
         <select class="form-select" id="modelSelect">
-          <option value="gpt-4">GPT-4</option>
-          <option value="gpt-4-32k">GPT-4-32k</option>
-          <option value="gpt-3.5-turbo">GPT-3.5-Turbo</option>
+          <option value="OpenAI|gpt-4.1-mini">OpenAI | GPT-4.1-Mini</option>
+          <option value="OpenAI|gpt-4">OpenAI | GPT-4</option>
+          <option value="OpenAI|gpt-4-32k">OpenAI | GPT-4-32k</option>
+          <option value="OpenAI|gpt-3.5-turbo">OpenAI | GPT-3.5-Turbo</option>
         </select>
       </div>
       <button class="btn btn-primary" id="askBtn">Zeptej se</button>
@@ -54,5 +58,6 @@
   
   <!-- JS for Demo -->
     <script src="js/app.js"></script>
+    <script src="js/speech.js"></script>
 </body>
 </html>

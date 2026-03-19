@@ -3,25 +3,8 @@ const userInput = document.getElementById('userInput');
 const modelSelect = document.getElementById('modelSelect');
 const answerBox = document.getElementById('answerBox');
 const priceEl = document.getElementById('price');
-askBtn.addEventListener('click', ask);
-userInput.textContent = "Francouzská černobílá komedie ze 70. let";
-userInput.textContent = "Návštěva Borise Johnsona na Ukrajině po začátku války";
-userInput.textContent = "Grónsko referendum o nezávislosti";
-async function ask() {
 
-  // const prompt = document.getElementById("q").value;
-  //alert(prompt);
-  
-  answerBox.textContent = "Čekám na odpověď...";
-  sMoviePrefix = `Zpracuj následující dotaz jako filmový expert. Zjisti, zda se dotaz týká osoby známé ve filmu.
-  Nebo zda se jedná o téma filmu, zemi původu, žánr, charakteristika (černobílý, animovaný..) nebo období vydání filmu. 
-  Země původu může být uvedena přídavným jménem. V tom případě odpověz názvem země.
-  Odpověz pouze ve formě JSON pole, kde 
-  jednotlivé klíče budou herec, režisér, hudební_skladatel, žánr, země_původu, charakteristika,
-  téma, rok_od, rok_do. 
-  \n\nDotaz: `
-
-  sGooglePrefix = `Zpracuj následující dotaz jako expert na vyhledávání informací na internetu. 
+const sGooglePrefix = `Zpracuj následující dotaz jako expert na vyhledávání informací na internetu. 
   Zjisti zda se dotaz týká vyhledávání článku, obrázku, obrázku k tisku, videa, podcastu, ppt nebo pdf. 
   Zjisti, které země a jazyka se dotaz týká.
   Zjisti, zda je hledání vhodné omezit pouze na určité webové stránky nebo jejich části.
@@ -31,27 +14,40 @@ async function ask() {
   Jazyk uveď ve ISO 639-1, zemi ve formátu ISO 3166-1 alpha-2, datum ve formátu YYYY-MM-DD.
   \n\nDotaz: `
 
-  sPrefix = sGooglePrefix
+const sMoviePrefix = `Zpracuj následující dotaz jako filmový expert. Zjisti, zda se dotaz týká osoby známé ve filmu.
+  Nebo zda se jedná o téma filmu, zemi původu, žánr, charakteristika (černobílý, animovaný..) nebo období vydání filmu. 
+  Země původu může být uvedena přídavným jménem. V tom případě odpověz názvem země.
+  Odpověz pouze ve formě JSON pole, kde 
+  jednotlivé klíče budou herec, režisér, hudební_skladatel, žánr, země_původu, charakteristika,
+  téma, rok_od, rok_do. 
+  \n\nDotaz: `
+
+askBtn.addEventListener('click', () => fAsk(sMoviePrefix));
+// userInput.textContent = "Francouzská černobílá komedie ze 70. let";
+// userInput.textContent = "Návštěva Borise Johnsona na Ukrajině po začátku války";
+// userInput.textContent = "Grónsko referendum o nezávislosti";
+userInput.textContent = localStorage.getItem('prompt') || "";
+async function fAsk(sPrefix) {
+
+  // const prompt = document.getElementById("q").value;
+  //alert(prompt);
+  localStorage.setItem('prompt', userInput.value.trim());
+  answerBox.textContent = "Čekám na odpověď...";
+
   sPrefix = sPrefix.replaceAll(/[\u0000-\u001F]/g, "");
   sPrefix = sPrefix.replaceAll('   ',' ').replaceAll('  ',' ');
   
   dctBody = { prefix: sPrefix,
-                prompt: userInput.value.trim(), 
-                model: modelSelect.value}
-  
-  // dctBody = {    prompt: sPrefix + userInput.value.trim(), 
-  //             model: modelSelect.value}
-
+              prompt: userInput.value.trim(),
+              service: modelSelect.value}  
   jsonBody = JSON.stringify(dctBody);
+
   const r = await fetch(
-    "https://openonce.pythonanywhere.com/openAI",
-    {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: jsonBody
-        }
+    "https://openonce.pythonanywhere.com/ask",
+    { method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: jsonBody,
+    }
   );
   //alert('after fetch');
   
@@ -69,7 +65,7 @@ async function ask() {
     answerBox.textContent = data.answer
   } else {
     priceEl.textContent = '-- hal';
-    answerBox.textContent = 'Error: ' + (data.answer || 'unknown')
+    answerBox.textContent = 'Error in price: ' + (data.answer || 'unknown')
   }
 
 x=0
