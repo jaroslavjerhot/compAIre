@@ -7,6 +7,7 @@ let recognition = null;
 let bListening = false;
 let iSilenceTimer = null;
 let sFinalText = "";
+let sLastTranscript = "";
 
 if (SpeechRecognition) {
   recognition = new SpeechRecognition();
@@ -57,7 +58,9 @@ if (SpeechRecognition) {
 
     for (let i = event.resultIndex; i < event.results.length; i++) {
       const sTranscript = event.results[i][0].transcript;
-
+      if (sTranscript.trim() === sLastTranscript.trim()) continue;
+      sLastTranscript = sTranscript;
+      
       if (event.results[i].isFinal) {
         sFinalText += sTranscript + " ";
       } else {
