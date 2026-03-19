@@ -72,8 +72,8 @@ if (SpeechRecognition) {
         if (!sInterim.includes(sTranscript)) {
           sInterim += sTranscript;
         } else {
-        alert('sInterim: ' + sInterim + '\nsTranscript: ' + sTranscript);
-      }
+          alert('sInterim: ' + sInterim + '\nsTranscript: ' + sTranscript);
+        }
       }
     }
 
