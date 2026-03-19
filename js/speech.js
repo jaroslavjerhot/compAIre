@@ -71,14 +71,14 @@ if (SpeechRecognition) {
       } else {
         if (!sInterim.includes(sTranscript)) {
           sInterim += sTranscript;
-        } else {
-          alert('sInterim: ' + sInterim + '\nsTranscript: ' + sTranscript);
         }
+        alert('sInterim: ' + sInterim + '\nsTranscript: ' + sTranscript);
+        
       }
     }
 
     if (sFinalText + sInterim) {
-      alert('sFinalText: ' + sFinalText + '\nsInterim: ' + sInterim);
+      alert('sFinalText2: ' + sFinalText + '\nsInterim: ' + sInterim);
       textarea.value = sFinalText + sInterim;
     }
 
