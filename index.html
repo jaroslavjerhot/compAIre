@@ -24,23 +24,20 @@
     <!-- Textarea and Model Selection -->
     <div class="card p-3 mb-3">
       <div class="mb-3">
-        <label for="userInput" class="form-label">Otázka:</label>
+        <!-- <label for="userInput" class="form-label">Otázka:</label> -->
       <div class="d-flex align-items-start gap-2">
         <button id="micBtn" type="button" class="btn btn-outline-light">
             <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
               <path fill="currentColor" d="M12 14a3 3 0 0 0 3-3V7a3 3 0 1 0-6 0v4a3 3 0 0 0 3 3Zm5-3a1 1 0 1 1 2 0a7 7 0 0 1-6 6.93V21h3a1 1 0 1 1 0 2H8a1 1 0 1 1 0-2h3v-3.07A7 7 0 0 1 5 11a1 1 0 1 1 2 0a5 5 0 0 0 10 0Z"/>
             </svg>
         </button>
+        &nbsp;
         <textarea id="userInput" class="form-control" rows="1"></textarea>
       </div>
       </div>
       <div class="mb-3">
         <label for="modelSelect" class="form-label">Vyber model:</label>
         <select class="form-select" id="modelSelect">
-          <!-- <option value="OpenAI|gpt-4.1-mini">OpenAI | GPT-4.1-Mini</option>
-          <option value="OpenAI|gpt-4">OpenAI | GPT-4</option>
-          <option value="OpenAI|gpt-4-32k">OpenAI | GPT-4-32k</option>
-          <option value="OpenAI|gpt-3.5-turbo">OpenAI | GPT-3.5-Turbo</option> -->
         </select>
       </div>
       <button class="btn btn-primary" id="askBtn">Zeptej se</button>
@@ -48,8 +45,7 @@
 
     <!-- Answer and Price -->
     <div class="card p-3">
-      <div class="mb-2"><strong>Odpověď:</strong></div>
-      <div class="mt-2"><strong>Cena/doba odpovědi: </strong><span id="price">0.00</span></div>
+      <div class="mt-2"><strong>Odpověď, cena a doba: </strong><span id="price">0.00</span></div>
       <div class="answer-box" id="answerBox"></div>
 
     </div>
