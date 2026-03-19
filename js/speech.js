@@ -67,7 +67,7 @@ if (SpeechRecognition) {
       sLastTranscript = sTranscript.trim();
 
       if (event.results[i].isFinal) {
-        alert('1: sTranscript: ' + sTranscript);
+        alert('1: sFinalText: ' + sFinalText +'sTranscript: ' + sTranscript);
         if (!sFinalText.includes(sTranscript)) {
           sFinalText += sTranscript + " ";
         }
@@ -81,7 +81,7 @@ if (SpeechRecognition) {
     }
 
     if (sFinalText + sInterim) {
-      alert('sFinalText3: ' + sFinalText + '\nsInterim: ' + sInterim);
+      // alert('sFinalText3: ' + sFinalText + '\nsInterim: ' + sInterim);
       textarea.value = sFinalText + sInterim;
     }
 
