@@ -67,18 +67,21 @@ if (SpeechRecognition) {
       sLastTranscript = sTranscript.trim();
 
       if (event.results[i].isFinal) {
-        sFinalText += sTranscript + " ";
+        alert('2: sTranscript: ' + sTranscript);
+        if (!sFinalText.includes(sTranscript)) {
+          sFinalText += sTranscript + " ";
+        }
       } else {
         if (!sInterim.includes(sTranscript)) {
           sInterim += sTranscript;
         }
-        alert('sInterim: ' + sInterim + '\nsTranscript: ' + sTranscript);
+        alert('2: sInterim: ' + sInterim + '\nsTranscript: ' + sTranscript);
         
       }
     }
 
     if (sFinalText + sInterim) {
-      alert('sFinalText2: ' + sFinalText + '\nsInterim: ' + sInterim);
+      alert('sFinalText3: ' + sFinalText + '\nsInterim: ' + sInterim);
       textarea.value = sFinalText + sInterim;
     }
 
