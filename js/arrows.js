@@ -52,7 +52,24 @@ document.addEventListener("keydown", function (event) {
 
 const oKeyDebug = document.getElementById("keyDebug");
 
+// const oDebugBox = document.getElementById("keyDebug");
 
+function fLog(sType, event) {
+  const sMsg =
+    "type=" + sType +
+    " | key=" + (event.key ?? "") +
+    " | code=" + (event.code ?? "") +
+    " | keyCode=" + (event.keyCode ?? "") +
+    " | which=" + (event.which ?? "") +
+    " | button=" + (event.button ?? "") +
+    " | buttons=" + (event.buttons ?? "") +
+    " | x=" + (event.clientX ?? "") +
+    " | y=" + (event.clientY ?? "") +
+    " | target=" + ((event.target && (event.target.id || event.target.tagName)) ?? "");
+
+  oDebugBox.textContent = sMsg;
+  
+}
 
 [
   "keydown",
@@ -70,15 +87,11 @@ const oKeyDebug = document.getElementById("keyDebug");
   "touchend",
   "focusin",
   "focusout",
+  "contextmenu",
+  "wheel",
+  "scroll",
   "change",
   "input",
-  "submit",
-  "scroll",
-  "resize",
-  "mouseenter",
-  "mouseleave",
-  "mouseover",
-  "mouseout"
 ].forEach(sEventType => {
   document.addEventListener(sEventType, event => fLog(sEventType, event), true);
 });
@@ -86,17 +99,17 @@ const oKeyDebug = document.getElementById("keyDebug");
 document.addEventListener("wheel", event => fLog("wheel", event), true);
 document.addEventListener("contextmenu", event => fLog("contextmenu", event), true);
 
-// if (lstDevice.includes("Mi-Box")){
-//     document.addEventListener("dblclick", function(event) {
-//         event.preventDefault();
-//         const el = document.activeElement;
-//         if (el && (el.tagName === "TEXTAREA" || el.tagName === "INPUT")) {
-//         el.value = ""}})
-//     // long click
-//     document.addEventListener("keypress", function(event) {
-//         if (event.code === 13) { // Enter key
-//             askBtn.classList.add("active");
-//             askBtn.click();
-//             setTimeout(() => askBtn.classList.remove("active"), 150);
-//     }});
-// }
+if (lstDevice.includes("Mi-Box")){
+    document.addEventListener("dblclick", function(event) {
+        event.preventDefault();
+        const el = document.activeElement;
+        if (el && (el.tagName === "TEXTAREA" || el.tagName === "INPUT")) {
+        el.value = ""}})
+    // long click
+    document.addEventListener("keypress", function(event) {
+        if (event.code === 13) { // Enter key
+            askBtn.classList.add("active");
+            askBtn.click();
+            setTimeout(() => askBtn.classList.remove("active"), 150);
+    }});
+}
