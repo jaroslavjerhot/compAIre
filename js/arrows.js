@@ -52,8 +52,8 @@ document.addEventListener("keydown", function (event) {
 
 // const oKeyDebug = document.getElementById("keyDebug");
 
-const iPrevEventX = 0;
-const iPrevEventY = 0;
+let iPrevEventX = 0;
+let iPrevEventY = 0;
 const oDebugBox = document.getElementById("keyDebug");
 
 function fLog(sType, event) {
