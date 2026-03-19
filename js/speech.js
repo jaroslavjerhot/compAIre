@@ -21,7 +21,7 @@ if (SpeechRecognition) {
       if (bListening) {
         recognition.stop();
       }
-    }, 2000);
+    }, 5000);
   }
 
   function fStartListening() {
@@ -67,7 +67,7 @@ if (SpeechRecognition) {
       sLastTranscript = sTranscript.trim();
 
       if (event.results[i].isFinal) {
-        alert('1: sFinalText: ' + sFinalText +'\nsTranscript: ' + sTranscript);
+        //alert('1: sFinalText: ' + sFinalText +'\nsTranscript: ' + sTranscript);
         if (!sFinalText.includes(sTranscript)) {
           // sFinalText += sTranscript + " ";
           sFinalText = sTranscript;
@@ -77,7 +77,7 @@ if (SpeechRecognition) {
         if (!sInterim.includes(sTranscript)) {
           sInterim += sTranscript;
         }
-        alert('2: sInterim: ' + sInterim + '\nsTranscript: ' + sTranscript);
+        // alert('2: sInterim: ' + sInterim + '\nsTranscript: ' + sTranscript);
         
       }
     }
