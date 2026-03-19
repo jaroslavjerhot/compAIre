@@ -52,6 +52,7 @@ document.addEventListener("keydown", function (event) {
 
 const oKeyDebug = document.getElementById("keyDebug");
 
+
 function fShowKey(event) {
   const sText =
     "type: " + event.type + "\n" +
@@ -67,4 +68,7 @@ function fShowKey(event) {
 
 document.addEventListener("keydown", fShowKey);
 document.addEventListener("keyup", fShowKey);
+document.addEventListener("mousemove", function (event) {
+  oKeyDebug.textContent = "mouse move: " + event.clientX + ", " + event.clientY;
+});
 

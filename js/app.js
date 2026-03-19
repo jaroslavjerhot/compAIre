@@ -23,6 +23,15 @@ const sMoviePrefix = `Zpracuj následující dotaz jako filmový expert. Zjisti,
   \n\nDotaz: `
 let lxdOpenAI = []
 
+let sDevice = 'unknown';
+if (navigator.userAgent.includes("AppleTV")) sDevice = "Apple TV";
+if (navigator.userAgent.includes("MIBOX")) sDevice = "Mi Box";
+if (navigator.userAgent.includes("Android")) sDevice = "Android";
+if (navigator.userAgent.includes("Windows")) sDevice = "Windows";
+
+
+
+
 document.addEventListener('DOMContentLoaded', async () => {
 
   const csv = await fLoadCsv(sOpenAIpricing)
@@ -45,7 +54,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   askBtn.addEventListener('click', () => fAsk(sMoviePrefix));
   userInput.textContent = localStorage.getItem('prompt') || "";
-  document.getElementById('keyDebug').textContent = "userAgent: " + navigator.userAgent;
+  document.getElementById('keyDebug').textContent = sDevice + ": " + navigator.userAgent;
   
 
 });
