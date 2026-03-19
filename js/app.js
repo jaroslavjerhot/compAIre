@@ -23,11 +23,11 @@ const sMoviePrefix = `Zpracuj následující dotaz jako filmový expert. Zjisti,
   \n\nDotaz: `
 let lxdOpenAI = []
 
-let sDevice = 'unknown';
-if (navigator.userAgent.includes("AppleTV")) sDevice = "Apple TV";
-if (navigator.userAgent.includes("MIBOX")) sDevice = "Mi Box";
-if (navigator.userAgent.includes("Android")) sDevice = "Android";
-if (navigator.userAgent.includes("Windows")) sDevice = "Windows";
+let lstDevice = [];
+if (navigator.userAgent.includes("AppleTV")) lstDevice.push("Apple TV");
+if (navigator.userAgent.includes("MIBOX")) lstDevice.push("Mi Box");
+if (navigator.userAgent.includes("Android")) lstDevice.push("Android");
+if (navigator.userAgent.includes("Windows")) lstDevice.push("Windows");
 
 
 
@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   askBtn.addEventListener('click', () => fAsk(sMoviePrefix));
   userInput.textContent = localStorage.getItem('prompt') || "";
-  document.getElementById('keyDebug').textContent = sDevice + ": " + navigator.userAgent;
+  document.getElementById('keyDebug').textContent = lstDevice.join(", ") + ": " + navigator.userAgent;
   
 
 });
