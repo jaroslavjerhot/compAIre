@@ -67,9 +67,11 @@ if (SpeechRecognition) {
       sLastTranscript = sTranscript.trim();
 
       if (event.results[i].isFinal) {
-        alert('1: sFinalText: ' + sFinalText +'sTranscript: ' + sTranscript);
+        alert('1: sFinalText: ' + sFinalText +'\nsTranscript: ' + sTranscript);
         if (!sFinalText.includes(sTranscript)) {
-          sFinalText += sTranscript + " ";
+          // sFinalText += sTranscript + " ";
+          sFinalText = sTranscript;
+          
         }
       } else {
         if (!sInterim.includes(sTranscript)) {
