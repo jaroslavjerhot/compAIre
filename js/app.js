@@ -21,30 +21,32 @@ const sMoviePrefix = `Zpracuj následující dotaz jako filmový expert. Zjisti,
   jednotlivé klíče budou herec, režisér, hudební_skladatel, žánr, země_původu, charakteristika,
   téma, rok_od, rok_do. 
   \n\nDotaz: `
+let lxdOpenAI = []
 
-const csv = await fLoadCsv(sOpenAIpricing)
-const lxdOpenAI = fCsvToLxd(csv);
+document.addEventListener('DOMContentLoaded', async () => {
 
-lxdOpenAI = lxdOpenAI.filter(dRow => Number(dRow.Total) <= 2);
-lxdOpenAI.forEach(dRow => {
-  sTotalCZK = (Number(dRow.Total) * 21 * 1.21).toFixed(0);
-  dRow.ModelName = "OpenAI | " + dRow.Model + "(" + sTotalCZK + " Kč/1Mt)";
-  dRow.Model = "OpenAI|" + dRow.Model
+  const csv = await fLoadCsv(sOpenAIpricing)
+  lxdOpenAI = fCsvToLxd(csv);
+
+  lxdOpenAI = lxdOpenAI.filter(dRow => Number(dRow.Total) <= 2);
+  lxdOpenAI.forEach(dRow => {
+    sTotalCZK = (Number(dRow.Total) * 21 * 1.21).toFixed(0);
+    dRow.ModelName = "OpenAI | " + dRow.Model + "(" + sTotalCZK + " Kč/1Mt)";
+    dRow.Model = "OpenAI|" + dRow.Model
+  });
+  lxdOpenAI.forEach(dRow => {
+        const oOption = document.createElement("option");
+        oOption.value = dRow.Model;
+        oOption.textContent = dRow.ModelName;
+        modelSelect.appendChild(oOption);
+  });
+
+
+  askBtn.addEventListener('click', () => fAsk(sMoviePrefix));
+  userInput.textContent = localStorage.getItem('prompt') || "";
 });
-lxdOpenAI.forEach(dRow => {
-      const oOption = document.createElement("option");
-      oOption.value = dRow.Model;
-      oOption.textContent = dRow.ModelName;
-      modelSelect.appendChild(oOption);
-});
 
-
-askBtn.addEventListener('click', () => fAsk(sMoviePrefix));
-// userInput.textContent = "Francouzská černobílá komedie ze 70. let";
-// userInput.textContent = "Návštěva Borise Johnsona na Ukrajině po začátku války";
-// userInput.textContent = "Grónsko referendum o nezávislosti";
-userInput.textContent = localStorage.getItem('prompt') || "";
-async function fAsk(sPrefix) {
+  async function fAsk(sPrefix) {
 
   // const prompt = document.getElementById("q").value;
   //alert(prompt);
