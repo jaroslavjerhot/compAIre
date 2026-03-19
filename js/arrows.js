@@ -27,7 +27,7 @@ function fSetCaretToEnd(oEl) {
 
 document.addEventListener("keydown", function (event) {
   if (event.key !== "ArrowDown" && event.key !== "ArrowUp") {
-    alert('key: ' + event.key + '\ncode: ' + event.code )  
+    // alert('key: ' + event.key + '\ncode: ' + event.code )  
     return;
   }
 
