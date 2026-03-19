@@ -28,16 +28,16 @@ document.addEventListener('DOMContentLoaded', async () => {
   const csv = await fLoadCsv(sOpenAIpricing)
   lxdOpenAI = fCsvToLxd(csv);
 
-  lxdOpenAI = lxdOpenAI.filter(dRow => Number(dRow.Total) <= 2);
+  lxdOpenAI = lxdOpenAI.filter(dRow => Number(dRow.iTotal) <= 2);
   lxdOpenAI.forEach(dRow => {
     sTotalCZK = (Number(dRow.Total) * 21 * 1.21).toFixed(0);
-    dRow.ModelName = "OpenAI | " + dRow.Model + "(" + sTotalCZK + " Kč/1Mt)";
-    dRow.Model = "OpenAI|" + dRow.Model
+    dRow.sModelName = "OpenAI | " + dRow.sModel + "(" + sTotalCZK + " Kč/1Mt)";
+    dRow.sModel = "OpenAI|" + dRow.sModel
   });
   lxdOpenAI.forEach(dRow => {
         const oOption = document.createElement("option");
-        oOption.value = dRow.Model;
-        oOption.textContent = dRow.ModelName;
+        oOption.value = dRow.sModel;
+        oOption.textContent = dRow.sModelName;
         modelSelect.appendChild(oOption);
   });
 
