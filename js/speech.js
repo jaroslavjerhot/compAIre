@@ -69,7 +69,9 @@ if (SpeechRecognition) {
       if (event.results[i].isFinal) {
         sFinalText += sTranscript + " ";
       } else {
-        sInterim += sTranscript;
+        if (!sInterim.includes(sTranscript)) {
+          sInterim += sTranscript;
+        }
       }
     }
 
