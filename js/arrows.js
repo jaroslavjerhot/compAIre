@@ -52,67 +52,52 @@ document.addEventListener("keydown", function (event) {
 
 const oKeyDebug = document.getElementById("keyDebug");
 
+// const oDebugBox = document.getElementById("keyDebug");
 
-// function fShowKey(event) {
-//   const sText =
-//     "type: " + event.type + "\n" +
-//     "key: " + event.key + "\n" +
-//     "code: " + event.code + "\n" +
-//     "keyCode: " + event.keyCode + "\n" +
-//     "which: " + event.which;
+// function fLog(sType, event) {
+//   const sMsg =
+//     "type=" + sType +
+//     " | key=" + (event.key ?? "") +
+//     " | code=" + (event.code ?? "") +
+//     " | keyCode=" + (event.keyCode ?? "") +
+//     " | which=" + (event.which ?? "") +
+//     " | button=" + (event.button ?? "") +
+//     " | buttons=" + (event.buttons ?? "") +
+//     " | x=" + (event.clientX ?? "") +
+//     " | y=" + (event.clientY ?? "") +
+//     " | target=" + ((event.target && (event.target.id || event.target.tagName)) ?? "");
 
-//   oKeyDebug.textContent = sText;
-
-//   alert(sText);
+//   //console.log(sMsg);
+// //   oDebugBox.textContent = sMsg + "\n" + oDebugBox.textContent;
+//   oDebugBox.textContent = sMsg;
+  
 // }
 
-// document.addEventListener("keydown", fShowKey);
-// document.addEventListener("keyup", fShowKey);
-// document.addEventListener("mousemove", function (event) {
-//   oKeyDebug.textContent = "mouse move: " + event.clientX + ", " + event.clientY;
+// [
+//   "keydown",
+//   "keyup",
+//   "keypress",
+//   "click",
+//   "dblclick",
+//   "mousedown",
+//   "mouseup",
+//   "pointerdown",
+//   "pointerup",
+//   "pointermove",
+//   "mousemove",
+//   "touchstart",
+//   "touchend",
+//   "focusin",
+//   "focusout"
+// ].forEach(sEventType => {
+//   document.addEventListener(sEventType, event => fLog(sEventType, event), true);
 // });
 
-const oDebugBox = document.getElementById("keyDebug");
+// document.addEventListener("wheel", event => fLog("wheel", event), true);
+// document.addEventListener("contextmenu", event => fLog("contextmenu", event), true);
 
-function fLog(sType, event) {
-  const sMsg =
-    "type=" + sType +
-    " | key=" + (event.key ?? "") +
-    " | code=" + (event.code ?? "") +
-    " | keyCode=" + (event.keyCode ?? "") +
-    " | which=" + (event.which ?? "") +
-    " | button=" + (event.button ?? "") +
-    " | buttons=" + (event.buttons ?? "") +
-    " | x=" + (event.clientX ?? "") +
-    " | y=" + (event.clientY ?? "") +
-    " | target=" + ((event.target && (event.target.id || event.target.tagName)) ?? "");
-
-  //console.log(sMsg);
-//   oDebugBox.textContent = sMsg + "\n" + oDebugBox.textContent;
-  oDebugBox.textContent = sMsg;
-  
-}
-
-[
-  "keydown",
-  "keyup",
-  "keypress",
-  "click",
-  "dblclick",
-  "mousedown",
-  "mouseup",
-  "pointerdown",
-  "pointerup",
-  "pointermove",
-  "mousemove",
-  "touchstart",
-  "touchend",
-  "focusin",
-  "focusout"
-].forEach(sEventType => {
-  document.addEventListener(sEventType, event => fLog(sEventType, event), true);
+document.addEventListener("dblclick", function(event) {
+    if (!lstDevice.includes("Mi-Box")) {return;}
+    event.preventDefault();
+    askBtn.click();
 });
-
-document.addEventListener("wheel", event => fLog("wheel", event), true);
-document.addEventListener("contextmenu", event => fLog("contextmenu", event), true);
-

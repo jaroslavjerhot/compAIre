@@ -25,7 +25,7 @@ let lxdOpenAI = []
 
 let lstDevice = [];
 if (navigator.userAgent.includes("AppleTV")) lstDevice.push("Apple TV");
-if (navigator.userAgent.includes("MIBOX")) lstDevice.push("Mi Box");
+if (navigator.userAgent.includes("MIBOX")) lstDevice.push("Mi-Box");
 if (navigator.userAgent.includes("Android")) lstDevice.push("Android");
 if (navigator.userAgent.includes("Windows")) lstDevice.push("Windows");
 
