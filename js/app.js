@@ -19,7 +19,7 @@ const sMoviePrefix = `Zpracuj následující dotaz jako filmový expert. Zjisti,
   Země původu může být uvedena přídavným jménem. V tom případě odpověz názvem země.
   Odpověz pouze ve formě JSON pole, kde 
   jednotlivé klíče budou herec, režisér, hudebník, žánr, země_původu, charakteristika,
-  téma, rok_od, rok_do. 
+  téma, rok_od, rok_do, ocenění. 
   \n\nDotaz: `
 let lxdOpenAI = []
 
